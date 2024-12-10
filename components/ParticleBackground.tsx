@@ -3,20 +3,24 @@
 import React, { useEffect } from "react";
 
 const ParticleBackground = () => {
-  // Handles WebGL context loss errors
-  const handleWebGLError = (event: WebGLContextEvent) => {
-    console.error("WebGL context lost:", event);
+  const handleWebGLError = (event: Event) => {
+    const webGLEvent = event as WebGLContextEvent; // Type assertion
+    console.error("WebGL context lost:", webGLEvent.statusMessage);
   };
 
   useEffect(() => {
     const canvas = document.querySelector("canvas");
-    
-    // Add event listener for WebGL context lost
-    canvas?.addEventListener("webglcontextlost", handleWebGLError);
 
-    // Cleanup the event listener on component unmount
+    canvas?.addEventListener(
+      "webglcontextlost",
+      handleWebGLError as EventListener // Explicit type assertion
+    );
+
     return () => {
-      canvas?.removeEventListener("webglcontextlost", handleWebGLError);
+      canvas?.removeEventListener(
+        "webglcontextlost",
+        handleWebGLError as EventListener
+      );
     };
   }, []);
 
