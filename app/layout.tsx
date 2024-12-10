@@ -1,7 +1,8 @@
 import { Inter } from 'next/font/google'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import Background from '@/components/layout/Background'
+import { Providers } from './providers'
+import Layout from '@/components/layout/Layout'
+import ErrorBoundary from '@/components/ErrorBoundary'
+import { Analytics } from '@/components/Analytics'
 import '@/styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,18 +18,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <div className="flex flex-col min-h-screen">
-          <Background />
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </div>
+        <Providers>
+          <ErrorBoundary>
+            <Layout>
+              <Analytics />
+              {children}
+            </Layout>
+          </ErrorBoundary>
+        </Providers>
       </body>
     </html>
   )
 }
-
-
 

@@ -58,6 +58,13 @@ function ParticleField() {
 export default function ParticleBackground() {
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
+  const [hasWebGLError, setHasWebGLError] = useState(false)
+
+  const handleWebGLError = (event: ErrorEvent) => {
+    event.preventDefault()
+    setHasWebGLError(true)
+    console.error('WebGL context lost', event)
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2000)
@@ -65,18 +72,20 @@ export default function ParticleBackground() {
   }, [])
 
   useEffect(() => {
-    const handleContextLost = (event) => {
-      event.preventDefault()
-      setHasError(true)
-    }
     const canvas = document.querySelector('canvas')
-    canvas?.addEventListener('webglcontextlost', handleContextLost)
-    return () => canvas?.removeEventListener('webglcontextlost', handleContextLost)
+    canvas?.addEventListener('webglcontextlost', handleWebGLError)
+    return () => canvas?.removeEventListener('webglcontextlost', handleWebGLError)
   }, [])
 
   if (isLoading) {
     return <div className="absolute inset-0 flex items-center justify-center bg-deep-space-blue">
       <div className="w-16 h-16 border-4 border-quantum-purple border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  }
+
+  if (hasWebGLError) {
+    return <div className="absolute inset-0 flex items-center justify-center bg-deep-space-blue text-white">
+      <p>3D background unavailable. Please refresh the page.</p>
     </div>
   }
 
