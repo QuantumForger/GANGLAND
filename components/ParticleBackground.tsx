@@ -1,106 +1,37 @@
-'use client'
+"use client";
 
-import { useRef, useMemo, useState, useEffect } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Points, PointMaterial } from '@react-three/drei'
-import * as THREE from 'three'
+import React, { useEffect } from "react";
 
-function ParticleField() {
-  const ref = useRef<THREE.Points>(null)
-  const [positions, colors] = useMemo(() => {
-    const positions = new Float32Array(1000 * 3)
-    const colors = new Float32Array(1000 * 3)
-    for (let i = 0; i < 1000; i++) {
-      const x = (Math.random() - 0.5) * 10
-      const y = (Math.random() - 0.5) * 10
-      const z = (Math.random() - 0.5) * 10
-      positions.set([x, y, z], i * 3)
-      colors.set([Math.random(), Math.random(), Math.random()], i * 3)
-    }
-    return [positions, colors]
-  }, [])
-
-  useFrame((state, delta) => {
-    if (ref.current) {
-      ref.current.rotation.x -= delta / 20
-      ref.current.rotation.y -= delta / 30
-    }
-  })
-
-  return (
-    <Points ref={ref}>
-      <PointMaterial 
-        vertexColors 
-        size={0.1} 
-        sizeAttenuation={true} 
-        depthWrite={false} 
-        transparent 
-        opacity={0.6} 
-      />
-      <bufferGeometry>
-        <bufferAttribute 
-          attach="attributes-position" 
-          count={positions.length / 3} 
-          array={positions} 
-          itemSize={3} 
-        />
-        <bufferAttribute 
-          attach="attributes-color" 
-          count={colors.length / 3} 
-          array={colors} 
-          itemSize={3} 
-        />
-      </bufferGeometry>
-    </Points>
-  )
-}
-
-export default function ParticleBackground() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [hasError, setHasError] = useState(false)
-  const [hasWebGLError, setHasWebGLError] = useState(false)
-
-  const handleWebGLError = (event: ErrorEvent) => {
-    event.preventDefault()
-    setHasWebGLError(true)
-    console.error('WebGL context lost', event)
-  }
+const ParticleBackground = () => {
+  // Handles WebGL context loss errors
+  const handleWebGLError = (event: WebGLContextEvent) => {
+    console.error("WebGL context lost:", event);
+  };
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000)
-    return () => clearTimeout(timer)
-  }, [])
+    const canvas = document.querySelector("canvas");
+    
+    // Add event listener for WebGL context lost
+    canvas?.addEventListener("webglcontextlost", handleWebGLError);
 
-  useEffect(() => {
-    const canvas = document.querySelector('canvas')
-    canvas?.addEventListener('webglcontextlost', handleWebGLError)
-    return () => canvas?.removeEventListener('webglcontextlost', handleWebGLError)
-  }, [])
-
-  if (isLoading) {
-    return <div className="absolute inset-0 flex items-center justify-center bg-deep-space-blue">
-      <div className="w-16 h-16 border-4 border-quantum-purple border-t-transparent rounded-full animate-spin"></div>
-    </div>
-  }
-
-  if (hasWebGLError) {
-    return <div className="absolute inset-0 flex items-center justify-center bg-deep-space-blue text-white">
-      <p>3D background unavailable. Please refresh the page.</p>
-    </div>
-  }
-
-  if (hasError) {
-    return <div className="absolute inset-0 flex items-center justify-center bg-deep-space-blue text-white">
-      <p>Unable to load 3D background. Please try refreshing the page.</p>
-    </div>
-  }
+    // Cleanup the event listener on component unmount
+    return () => {
+      canvas?.removeEventListener("webglcontextlost", handleWebGLError);
+    };
+  }, []);
 
   return (
-    <div className="absolute inset-0 z-0">
-      <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
-        <ParticleField />
-      </Canvas>
-    </div>
-  )
-}
+    <canvas
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: -1,
+      }}
+    />
+  );
+};
 
+export default ParticleBackground;
