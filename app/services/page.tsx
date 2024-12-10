@@ -1,9 +1,9 @@
-"use clientt";
+"use client";
 
-import React, { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import React, { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface Service {
   id: string;
