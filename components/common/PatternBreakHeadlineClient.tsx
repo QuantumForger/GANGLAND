@@ -1,23 +1,7 @@
-// components/common/PatternBreakHeadlineClient.tsx
-import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 
-const PatternBreakHeadlineClient = () => {
-  useEffect(() => {
-    const gradientAnimation = `
-      /* Your gradient animation CSS here */
-    `;
+const PatternBreakHeadlineClient = dynamic(() => import('./PatternBreakHeadlineClient'), { ssr: false });
 
-    const style = document.createElement('style');
-    style.textContent = gradientAnimation;
-    document.head.appendChild(style);
+const PatternBreakHeadline = () => <PatternBreakHeadlineClient />;
 
-    return () => {
-      // Cleanup the style element on component unmount
-      document.head.removeChild(style);
-    };
-  }, []);
-
-  return <h1>Your headline here</h1>;
-};
-
-export default PatternBreakHeadlineClient;
+export default PatternBreakHeadline;
