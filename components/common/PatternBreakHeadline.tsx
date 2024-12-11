@@ -1,11 +1,21 @@
-// File: components/common/PatternBreakHeadline.tsx
-import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
 
-// Dynamically import the client-side component with SSR disabled
-const PatternBreakHeadlineClient = dynamic(() => import('./PatternBreakHeadlineClient'), { ssr: false });
+const PatternBreakHeadlineClient = () => {
+  useEffect(() => {
+    const gradientAnimation = `
+      /* Your gradient CSS animation code here */
+    `;
+    const style = document.createElement('style');
+    style.textContent = gradientAnimation;
+    document.head.appendChild(style);
 
-const PatternBreakHeadline = () => {
-  return <PatternBreakHeadlineClient />;
+    return () => {
+      // Cleanup the style element on unmount
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  return <h1>Your Headline Here</h1>;
 };
 
-export default PatternBreakHeadline;
+export default PatternBreakHeadlineClient;
