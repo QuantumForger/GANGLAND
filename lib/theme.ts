@@ -36,4 +36,7 @@ export const theme = {
 }
 
 export type Theme = typeof theme
+import { theme } from '@/lib/theme';
+
+console.log(theme.colors.successGreen); // #059669
 
