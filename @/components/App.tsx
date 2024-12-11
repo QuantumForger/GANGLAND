@@ -1,13 +1,9 @@
-import React from 'react';
+import React from 'react'
+import App from './App'
 
-const App: React.FC = () => {
-  return (
-    <div className="app">
-      <h1>Welcome to GANGLAND</h1>
-      <p>This is the main App component.</p>
-    </div>
-  );
-};
+const AppWrapper: React.FC = () => {
+  return <App />
+}
 
-export default App;
+export default AppWrapper
 
