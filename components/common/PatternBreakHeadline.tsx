@@ -1,33 +1,11 @@
-import React from 'react'
-import { theme } from '@/lib/theme'
+// File: components/common/PatternBreakHeadline.tsx
+import dynamic from 'next/dynamic';
 
-interface PatternBreakHeadlineProps {
-  children: React.ReactNode
-}
+// Dynamically import the client-side component with SSR disabled
+const PatternBreakHeadlineClient = dynamic(() => import('./PatternBreakHeadlineClient'), { ssr: false });
 
-export default function PatternBreakHeadline({ children }: PatternBreakHeadlineProps) {
-  return (
-    <h2 
-      className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-transparent bg-clip-text animate-gradient"
-      style={{ 
-        backgroundImage: `linear-gradient(to right, ${theme.colors.quantumPurple}, ${theme.colors.successGreen}, ${theme.colors.quantumPurple})`,
-        backgroundSize: '200% auto',
-      }}
-    >
-      {children}
-    </h2>
-  )
-}
+const PatternBreakHeadline = () => {
+  return <PatternBreakHeadlineClient />;
+};
 
-const gradientAnimation = `
-  @keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-`;
-
-const style = document.createElement('style');
-style.textContent = gradientAnimation;
-document.head.appendChild(style);
-
+export default PatternBreakHeadline;

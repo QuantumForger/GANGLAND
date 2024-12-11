@@ -1,6 +1,7 @@
+// components/common/PatternBreakHeadlineClient.tsx
 import { useEffect } from 'react';
 
-const PatternBreakHeadline = () => {
+const PatternBreakHeadlineClient = () => {
   useEffect(() => {
     const gradientAnimation = `
       /* Your gradient animation CSS here */
@@ -11,15 +12,12 @@ const PatternBreakHeadline = () => {
     document.head.appendChild(style);
 
     return () => {
-      // Cleanup: Remove the style element on unmount
+      // Cleanup the style element on component unmount
       document.head.removeChild(style);
     };
-  }, []); // Empty dependency array ensures it runs only once
+  }, []);
 
-  return (
-    <h1>Your headline here</h1>
-  );
+  return <h1>Your headline here</h1>;
 };
 
-export default PatternBreakHeadline;
-
+export default PatternBreakHeadlineClient;
