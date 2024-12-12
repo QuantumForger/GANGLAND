@@ -83,13 +83,13 @@ export default function AboutPage() {
             {
               name: "Elara Quantum",
               role: "Founder & CEO",
-              image: "/placeholder.svg?height=150&width=150",
+              image: "/images/elara-quantum.png",
               story: "Growing up in a family of small business owners, I saw firsthand the struggles of competing in a rapidly digitalizing world. My journey from a curious tech enthusiast to the founder of Quantum AI Forge is driven by a simple belief: AI should empower, not overpower, small businesses."
             },
             {
               name: "Zephyr Nexus",
               role: "Chief AI Architect",
-              image: "/placeholder.svg?height=150&width=150",
+              image: "/images/zephyr-nexus.png",
               story: "My fascination with AI began in college, but it was a local diner's closure that made me realize the real-world impact of technology. I joined Quantum AI Forge to ensure that the AI revolution lifts all boats, not just the big ships. Every algorithm I design is a step towards a more equitable digital economy."
             }
           ].map((member, index) => (
@@ -115,10 +115,16 @@ export default function AboutPage() {
           <CardContent>
             <div className="flex flex-col md:flex-row items-center mb-6">
               <div className="w-full md:w-1/2 mb-4 md:mb-0 md:mr-4">
-                <img src="/placeholder.svg?height=200&width=300&text=Before+AI+Integration" alt="Bookstore before AI integration" className="rounded-lg shadow-lg" />
+                {/* Local Placeholder Image */}
+                <img src="/images/before-ai-integration.png" 
+                     alt="Bookstore before AI integration" 
+                     className="rounded-lg shadow-lg" />
               </div>
               <div className="w-full md:w-1/2">
-                <img src="/placeholder.svg?height=200&width=300&text=After+AI+Integration" alt="Bookstore after AI integration" className="rounded-lg shadow-lg" />
+                {/* Local Placeholder Image */}
+                <img src="/images/after-ai-integration.png" 
+                     alt="Bookstore after AI integration" 
+                     className="rounded-lg shadow-lg" />
               </div>
             </div>
             <h3 className="text-2xl font-bold mb-4 text-purple-400">Sarah's Bookstore: From Struggle to Success</h3>
@@ -149,17 +155,17 @@ export default function AboutPage() {
         <div className="grid md:grid-cols-3 gap-8">
           {[
             {
-              icon: <Heart className="h-12 w-12 mb-4 text-purple-400" />,
+              icon: <Heart className="h-12 w-12 mb-4 text-purple-400" />, 
               title: "Empathy First",
               description: "We believe in understanding the human stories behind every business. It's not just about implementing AI; it's about preserving legacies and empowering dreams."
             },
             {
-              icon: <Lightbulb className="h-12 w-12 mb-4 text-purple-400" />,
+              icon: <Lightbulb className="h-12 w-12 mb-4 text-purple-400" />, 
               title: "Innovative Accessibility",
               description: "We're committed to making cutting-edge AI accessible to all. Our solutions are powerful yet user-friendly, ensuring that even the least tech-savvy can harness the power of AI."
             },
             {
-              icon: <Users className="h-12 w-12 mb-4 text-purple-400" />,
+              icon: <Users className="h-12 w-12 mb-4 text-purple-400" />, 
               title: "Community Impact",
               description: "Every business we empower strengthens a community. We measure our success not just in numbers, but in the vibrant local economies and preserved community landmarks we help sustain."
             }
@@ -190,4 +196,5 @@ export default function AboutPage() {
     </div>
   )
 }
+ 
 
