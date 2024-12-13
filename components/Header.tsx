@@ -42,16 +42,15 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <Link href="/" className="flex items-center">
-            {/* TODO: Replace placeholder with actual logo */}
-            <Image 
-              src="/placeholder.svg?height=40&width=40" 
-              alt="Quantum AI Forge Logo" 
-              width={40} 
-              height={40} 
+            <Image
+              src="/images/logo.png"
+              alt="Quantum AI Forge Logo"
+              width={40}
+              height={40}
               className="mr-2 hover:opacity-90 transition-opacity"
               priority
             />
-            <motion.div 
+            <motion.div
               className="text-2xl font-bold quantum-glow transition-all duration-300 hover:scale-105"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -59,22 +58,19 @@ export default function Header() {
               Quantum AI Forge
             </motion.div>
           </Link>
-          
+
           <div className="hidden md:flex space-x-6">
             {navItems.map((item) => (
-              <Link 
+              <Link
                 key={item.name}
                 href={item.href}
                 className={`text-white hover:text-quantum-purple transition-colors relative ${
                   activeSection === item.href.slice(1) ? 'text-quantum-purple' : ''
                 }`}
               >
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   {item.name}
-                  <motion.span 
+                  <motion.span
                     className={`absolute bottom-0 left-0 w-full h-0.5 bg-success-green transform scale-x-0 transition-transform duration-300 ${
                       activeSection === item.href.slice(1) ? 'scale-x-100' : ''
                     }`}
@@ -85,7 +81,7 @@ export default function Header() {
               </Link>
             ))}
             <Link href="/contact">
-              <motion.button 
+              <motion.button
                 className="bg-gradient-to-r from-elite-navy to-quantum-purple hover:from-quantum-purple hover:to-elite-navy text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-glow-purple transform hover:scale-105 whitespace-nowrap"
                 whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(124, 58, 237, 0.7)' }}
                 whileTap={{ scale: 0.95 }}
@@ -95,7 +91,7 @@ export default function Header() {
             </Link>
           </div>
 
-          <button 
+          <button
             className="md:hidden text-white hover:text-quantum-purple transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -104,7 +100,7 @@ export default function Header() {
         </nav>
 
         {isMenuOpen && (
-          <motion.div 
+          <motion.div
             className="md:hidden mt-4 bg-deep-space-blue bg-opacity-90 backdrop-filter backdrop-blur-lg p-4 rounded-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -112,16 +108,16 @@ export default function Header() {
             transition={{ duration: 0.3 }}
           >
             {navItems.map((item) => (
-              <Link 
-                key={item.name} 
-                href={item.href} 
+              <Link
+                key={item.name}
+                href={item.href}
                 className="block py-2 text-white hover:text-quantum-purple transition-colors"
               >
                 {item.name}
               </Link>
             ))}
             <Link href="/contact">
-              <motion.button 
+              <motion.button
                 className="w-full mt-4 bg-gradient-to-r from-elite-navy to-quantum-purple hover:from-quantum-purple hover:to-elite-navy text-white px-4 py-3 rounded-full font-semibold transition-colors text-center whitespace-nowrap"
                 whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(124, 58, 237, 0.7)' }}
                 whileTap={{ scale: 0.95 }}
@@ -136,4 +132,5 @@ export default function Header() {
     </header>
   )
 }
+
 
