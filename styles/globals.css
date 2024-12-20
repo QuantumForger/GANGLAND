@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 :root {
   --deep-space-blue: #0B2447;
@@ -12,7 +12,6 @@
 }
 
 body {
-  background: var(--deep-space-blue);
   color: var(--text-light);
   font-family: 'Inter', sans-serif;
 }
@@ -48,6 +47,18 @@ body {
   }
 }
 
+.text-gradient {
+  background: linear-gradient(45deg, var(--text-light), var(--quantum-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.hover\:shadow-glow-purple:hover {
+  box-shadow: 0 0 15px var(--quantum-purple);
+}
+
 @keyframes pulse {
   0% {
     opacity: 0.6;
@@ -60,23 +71,85 @@ body {
   }
 }
 
-/* Dark mode styles */
-.dark {
-  --deep-space-blue: #020617;
-  --elite-navy: #0f172a;
-  --quantum-purple: #7c3aed;
-  --success-green: #10b981;
-  --text-light: #f1f5f9;
-  --text-dark: #0f172a;
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
 }
 
-.dark body {
-  background-color: var(--deep-space-blue);
-  color: var(--text-light);
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--elite-navy), var(--quantum-purple));
 }
 
-.dark .glassmorphism {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+.hover\:from-quantum-purple:hover {
+  background-image: linear-gradient(to right, var(--quantum-purple), var(--elite-navy));
+}
+
+.hover\:shadow-glow-purple:hover {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.7);
+}
+
+.transform {
+  transition: transform 0.3s ease-in-out;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, var(--quantum-purple), var(--success-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.bg-split-gradient {
+  background: linear-gradient(90deg, 
+    var(--deep-space-blue) 0%, 
+    var(--elite-navy) 50%, 
+    var(--quantum-purple) 100%
+  );
+}
+
+.hover-lift {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.bg-neural-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+body {
+  background: var(--deep-space-blue);
 }
 

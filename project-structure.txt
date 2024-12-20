@@ -1,0 +1,47 @@
+root/
+├── app/                     # Main app directory for Next.js features
+│   ├── about/
+│   │   └── page.tsx
+│   ├── blog/
+│   │   └── page.tsx
+│   ├── case-studies/
+│   │   └── page.tsx
+│   ├── contact/
+│   │   └── page.tsx
+│   ├── pricing/
+│   │   └── page.tsx
+│   ├── services/
+│   │   └── page.tsx
+│   ├── layout.tsx           # Root layout component
+│   └── page.tsx             # Root page
+├── components/              # Reusable components
+│   ├── common/              # Commonly shared components
+│   │   ├── PatternBreakHeadline.tsx
+│   │   ├── ProofSequence.tsx
+│   │   └── ValueBridge.tsx
+│   ├── layout/              # Layout components
+│   │   ├── Background.tsx
+│   │   ├── Footer.tsx
+│   │   └── Header.tsx
+│   ├── ui/                  # Atomic UI components
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   └── Input.tsx
+│   ├── Hero.tsx
+│   ├── OurApproach.tsx
+│   └── ParticleBackground.tsx
+├── lib/                     # Utility files
+│   └── theme.ts             # Theme settings
+├── public/                  # Publicly served files
+│   └── images/              # Image assets
+│       ├── QLOGO.png
+│       └── placeholder.txt
+├── styles/                  # Style files
+│   └── globals.css          # Global styles (consolidated)
+├── .gitignore               # Git ignore file
+├── next.config.js           # Next.js configuration
+├── package.json             # Package dependencies
+├── postcss.config.js        # PostCSS configuration
+├── README.md                # Project README
+└── tailwind.config.js       # TailwindCSS configuration
+
