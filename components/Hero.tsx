@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import ParticleBackground from './ParticleBackground'
+import Image from 'next/image'
 
 const powerVerbs = ['leadership', 'evolution', 'transformation']
 
@@ -74,6 +75,10 @@ export default function Hero() {
           <Link href="/contact">
             <motion.button
               className="bg-quantum-purple text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:bg-opacity-80"
+              style={{
+                transform: 'translateZ(0)',
+                backfaceVisibility: 'hidden',
+              }}
               whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(124, 58, 237, 0.7)' }}
               whileTap={{ scale: 0.95 }}
               animate={{ boxShadow: ['0 0 0 rgba(124, 58, 237, 0)', '0 0 20px rgba(124, 58, 237, 0.7)', '0 0 0 rgba(124, 58, 237, 0)'] }}
@@ -113,16 +118,21 @@ export default function Hero() {
         >
           <p className="text-lg font-semibold text-gray-400">Trusted by:</p>
           {trustLogos.map((logo, index) => (
-            <motion.img 
-              key={logo.name} 
-              src={logo.logo} 
-              alt={logo.name} 
-              className="h-8 opacity-70 hover:opacity-100 transition-opacity duration-300"
+            <motion.div 
+              key={logo.name}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 0.7, y: 0 }}
               transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
               whileHover={{ opacity: 1, scale: 1.05 }}
-            />
+            >
+              <Image 
+                src={logo.logo} 
+                alt={logo.name} 
+                width={100}
+                height={50}
+                className="opacity-70 hover:opacity-100 transition-opacity duration-300"
+              />
+            </motion.div>
           ))}
         </motion.div>
         
