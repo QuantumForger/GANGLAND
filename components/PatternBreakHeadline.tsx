@@ -1,24 +1,33 @@
-'use client'; // Add this line to make it a Client Component
+import React from 'react'
+import { theme } from '@/lib/theme'
 
-import { useEffect } from 'react';
+interface PatternBreakHeadlineProps {
+  children: React.ReactNode
+}
 
-const PatternBreakHeadlineClient = () => {
-  useEffect(() => {
-    const gradientAnimation = `
-      /* Add your gradient animation CSS here */
-    `;
+export default function PatternBreakHeadline({ children }: PatternBreakHeadlineProps) {
+  return (
+    <h2 
+      className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-transparent bg-clip-text animate-gradient"
+      style={{ 
+        backgroundImage: `linear-gradient(to right, ${theme.colors.quantumPurple}, ${theme.colors.successGreen}, ${theme.colors.quantumPurple})`,
+        backgroundSize: '200% auto',
+      }}
+    >
+      {children}
+    </h2>
+  )
+}
 
-    const style = document.createElement('style');
-    style.textContent = gradientAnimation;
-    document.head.appendChild(style);
+const gradientAnimation = `
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+`;
 
-    return () => {
-      // Cleanup: Remove the style element on unmount
-      document.head.removeChild(style);
-    };
-  }, []);
+const style = document.createElement('style');
+style.textContent = gradientAnimation;
+document.head.appendChild(style);
 
-  return <h1>Your Headline Here</h1>;
-};
-
-export default PatternBreakHeadlineClient;

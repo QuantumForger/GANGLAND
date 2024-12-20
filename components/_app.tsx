@@ -1,16 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App'; // Ensure App is defined in './App.tsx' or './App.jsx'
-import './index.css'; // Global CSS styles
+import { AppProps } from 'next/app'
+import { ThemeProvider } from '@/contexts/ThemeContext'
+import { Provider as ReduxProvider } from 'react-redux'
+import { store } from '@/store'
+import Layout from '../components/layout/Layout'
+import ErrorBoundary from '@/components/ErrorBoundary'
+import { Analytics } from '@vercel/analytics/react'
+import * as Sentry from "@sentry/nextjs"
+import '../styles/globals.css'
 
-// Access the root element in the DOM
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+Sentry.init({
+  dsn: "YOUR_SENTRY_DSN", // Replace with your actual Sentry DSN
+  tracesSampleRate: 1.0,
+});
 
-// Render the React application
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <ErrorBoundary>
+      <ReduxProvider store={store}>
+        <ThemeProvider>
+          <Layout>
+            <Analytics />
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </ReduxProvider>
+    </ErrorBoundary>
+  )
+}
+
